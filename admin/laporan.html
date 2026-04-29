@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Absensi - Admin</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h2>Laporan Absensi</h2>
+        <div>
+            <a href="index.html">Dashboard</a>
+            <button onclick="logout()">Logout</button>
+        </div>
+    </nav>
+    
+    <div class="dashboard">
+        <div class="filter-section">
+            <input type="date" id="filterDate" onchange="loadLaporan()">
+            <button onclick="loadLaporan()">Filter</button>
+        </div>
+        
+        <div class="table-container">
+            <table id="laporanTable">
+                <thead>
+                    <tr>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Tipe</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="laporanBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+    async function loadLaporan() {
+        const date = document.getElementById('filterDate').value;
+        const response = await fetch(`../php/export.php?action=getLaporan&date=${date}`);
+        const data = await response.json();
+        
+        const tbody = document.getElementById('laporanBody');
+        tbody.innerHTML = data.map(item => `
+            <tr>
+                <td>${item.nama}</td>
+                <td>${item.email}</td>
+                <td>${item.tanggal}</td>
+                <td>${item.waktu}</td>
+                <td>${item.latitude}</td>
+                <td>${item.longitude}</td>
+                <td>${item.tipe}</td>
+                <td>${item.status}</td>
+            </tr>
+        `).join('');
+    }
+    
+    // Load laporan saat halaman dimuat
+    loadLaporan();
+    </script>
+</body>
+</html>
