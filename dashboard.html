@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Absensi</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h2>Absensi <span id="userName"></span></h2>
+        <button onclick="logout()">Logout</button>
+    </nav>
+    
+    <div class="dashboard">
+        <div class="absensi-card">
+            <h3>Absensi Hari Ini</h3>
+            <div class="status-card" id="statusCard">
+                <p>Belum absen hari ini</p>
+            </div>
+            <button class="absen-btn" onclick="startAbsensi()" id="absenBtn">Absen Sekarang</button>
+        </div>
+        
+        <div class="selfie-container" id="selfieContainer" style="display:none;">
+            <h3>Ambil Selfie</h3>
+            <video id="video" width="300" height="300" autoplay></video>
+            <canvas id="canvas" width="300" height="300" style="display:none;"></canvas>
+            <button onclick="capturePhoto()" id="captureBtn">📸 Ambil Foto</button>
+            <button onclick="cancelAbsensi()">Batal</button>
+        </div>
+        
+        <div class="history">
+            <h3>Riwayat Absensi</h3>
+            <div id="historyList"></div>
+        </div>
+    </div>
+
+    <script src="js/selfie.js"></script>
+    <script src="js/gps.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
